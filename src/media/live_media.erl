@@ -35,7 +35,12 @@
 }).
 
 default_timeout() ->
-  600000.
+    case ems:get_var(media_default_timeout, []) of
+	[] ->
+	    600000;
+	DefaultTimeout ->
+	    DefaultTimeout
+    end.
 
 %%%------------------------------------------------------------------------
 %%% Callback functions from ems_media

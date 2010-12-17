@@ -31,7 +31,12 @@
 -export([file_dir/1, file_format/1, default_timeout/0]).
 
 default_timeout() ->
-  60000.
+    case ems:get_var(media_default_timeout, []) of
+	[] ->
+	    600000;
+	DefaultTimeout ->
+	    DefaultTimeout
+    end.
 
 %%%------------------------------------------------------------------------
 %%% Callback functions from ems_media
