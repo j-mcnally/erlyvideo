@@ -29,6 +29,7 @@ update:
 	git pull
 
 compile:
+	./generate_plugins.sh
 	./rebar compile
 
 release: compile
@@ -47,7 +48,6 @@ tgz: release
 
 clean:
 	./rebar clean
-	rm -fv plugins/*/ebin/*.beam
 	rm -fv erl_crash.dump
 
 clean-doc:
@@ -57,7 +57,7 @@ clean-doc:
 
 
 run: priv/erlyvideo.conf priv/log4erl.conf compile
-	ERL_LIBS=apps:..:deps erl -boot start_sasl -s erlyvideo
+	ERL_LIBS=apps:plugins:..:deps erl -boot start_sasl -s erlyvideo
 
 priv/log4erl.conf: priv/log4erl.conf.sample
 	[ -f priv/log4erl.conf ] || cp priv/log4erl.conf.sample priv/log4erl.conf
