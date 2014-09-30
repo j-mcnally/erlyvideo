@@ -92,7 +92,7 @@ hex(N) when N >= 10, N < 16 ->
   $a + (N-10).
   
 session_sign(Session, Secret) ->
-  binary_to_hexbin(crypto:sha_mac(Secret, Session)).
+  binary_to_hexbin(crypto:hmac(sha, Secret, Session)).
   
   
 verify_signature(_, _, undefined) ->
